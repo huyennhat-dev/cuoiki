@@ -17,21 +17,13 @@ public class AccountService {
     return repo.save(account);
   }
 
-  public int checkAccount(Account account) {
+  public Account checkAccount(Account account) {
     String email = account.getEmail();
     String password = account.getPassword();
     if (email != null && password != null) {
-      Account acc = repo.findByEmail(email);
-      if (acc != null) {
-        if (password == acc.getPassword()) {
-          return 0;//login thanh cong
-        }
-        return 1;//sai mat khau
-      }
-      //tai khoan khong ton tai
-      return 2;
+      return repo.findOneByEmailIgnoreCaseAndPassword(email, password);
     }
-    return 3;//thong tin rong
+    return null;//thong tin rong
   }
 
   public Account updateAccount(Account account) {
