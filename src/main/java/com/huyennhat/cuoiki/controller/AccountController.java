@@ -21,4 +21,9 @@ public class AccountController {
   public Account register(@RequestBody Account account) {
     return service.saveAccount(account);
   }
+
+  @PostMapping("/login")
+  public  Account login(@RequestBody Account account){
+     return service.checkAccount(account);
+  }
 }
